@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Honda Simpang Cilegon | Pusat Kredit Motor Honda Terpercaya</title>
+    <meta name="description" content="Dealer Resmi Honda Simpang. Dapatkan promo kredit motor Beat, Vario, PCX, dan Stylo dengan DP ringan dan proses cepat di Cilegon & Serang.">
+    <meta name="keywords" content="honda cilegon, kredit motor honda, sales honda simpang, promo honda beat, honda vario 160, dealer honda serang">
+    <meta name="author" content="Andika Rendi Prakarsa">
+    
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="text-red">Honda</span>Simpang
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog</a></li>
+                    <li><a href="simulasi.html">Simulasi Kredit</a></li>
+                    <li><a href="promo.html">Promo</a></li>
+                    <li><a href="edukasi.html">Edukasi</a></li>
+                </ul>
+            </nav>
+            <div class="auth-btn">
+                <button id="btn-login" class="btn-outline">Sales Login</button>
+            </div>
+            <div class="mobile-menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Wujudkan Impian Punya <span class="text-red">Honda Baru</span> Hari Ini</h1>
+            <p>Proses Cepat • Syarat Mudah • STNK Diantar Sampai Rumah.</p>
+            <div class="cta-group">
+                <a href="https://wa.me/6281316445477?text=Halo%20Mas%20Andika,%20saya%20mau%20tanya%20promo%20terbaru." target="_blank" class="btn-primary">
+                    Chat WhatsApp Sekarang
+                </a>
+                <a href="katalog.html" class="btn-secondary">Lihat Katalog</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="placeholder-box">Foto Motor Premium (PCX/Stylo)</div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container grid-3">
+            <div class="feature-card">
+                <h3>⚡ Proses Kilat</h3>
+                <p>Data dijemput, survei fleksibel, motor dikirim segera setelah ACC.</p>
+            </div>
+            <div class="feature-card">
+                <h3>💰 DP & Angsuran Ringan</h3>
+                <p>Simulasi kredit transparan sesuai budget Anda. Tanpa biaya siluman.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ Aman & Resmi</h3>
+                <p>Transaksi langsung ke rekening dealer resmi Honda Simpang. 100% Aman.</p>
+            </div>
+        </div>
+    </section>
+
+    <a href="https://wa.me/6281316445477?text=Halo,%20saya%20tertarik%20ambil%20motor." class="floating-wa" aria-label="Chat WhatsApp">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Honda Simpang Cilegon. Developed by Andika Rendi Prakarsa.</p>
+            <div class="footer-links">
+                <a href="/admin/">Sales Area</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import Auth from '../core/auth.js';
+        import Router from '../core/router.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Jalankan Router untuk update judul & menu aktif
+            Router.init();
+            
+            // 2. Cek status login untuk tombol admin
+            const user = Auth.getUser();
+            const loginBtn = document.getElementById('btn-login');
+            
+            if (user) {
+                loginBtn.textContent = 'Dashboard';
+                loginBtn.onclick = () => window.location.href = '/admin/';
+            } else {
+                loginBtn.onclick = () => Auth.login();
+            }
+        });
+    </script>
+</body>
+</html>
