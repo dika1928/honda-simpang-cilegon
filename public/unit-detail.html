@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Detail Motor | Honda Simpang Cilegon</title>
+    <meta name="description" content="Spesifikasi lengkap dan harga terbaru motor Honda. Hitung angsuran dan dapatkan promo terbaik hari ini.">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="text-red">Honda</span>Simpang
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="katalog.html" class="active">Katalog</a></li>
+                    <li><a href="simulasi.html">Simulasi Kredit</a></li>
+                    <li><a href="promo.html">Promo</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <section class="product-detail">
+        <div class="container grid-detail">
+            
+            <div class="detail-gallery">
+                <div class="main-image">
+                    <img id="unit-img" src="https://via.placeholder.com/600x400?text=Memuat+Gambar..." alt="Foto Motor">
+                </div>
+                <div class="color-options">
+                    <span class="text-label">Pilihan Warna:</span>
+                    <div id="color-badges">
+                        <div class="color-dot bg-red" title="Merah"></div>
+                        <div class="color-dot bg-black" title="Hitam"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-info">
+                <h1 id="unit-name">Memuat Data...</h1>
+                <p class="unit-tagline" id="unit-desc">Tunggu sebentar...</p>
+                
+                <div class="price-box">
+                    <span class="label">Harga OTR Mulai:</span>
+                    <h2 class="price-main" id="unit-price">Rp -</h2>
+                    <p class="promo-text">🔥 Promo: <span id="unit-promo">-</span></p>
+                </div>
+
+                <div class="action-buttons-lg">
+                    <a href="#" id="wa-link" class="btn-primary btn-block">
+                        Pesan Sekarang (WhatsApp)
+                    </a>
+                    <a href="simulasi.html" class="btn-secondary btn-block">
+                        Hitung Cicilan
+                    </a>
+                </div>
+
+                <div class="specs-table">
+                    <h3>Spesifikasi Utama</h3>
+                    <table>
+                        <tr>
+                            <td>Mesin</td>
+                            <td id="spec-engine">-</td>
+                        </tr>
+                        <tr>
+                            <td>Tipe</td>
+                            <td id="spec-type">-</td>
+                        </tr>
+                        <tr>
+                            <td>Fitur Unggulan</td>
+                            <td id="spec-feature">-</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Honda Simpang Cilegon.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import Router from '../core/router.js';
+        import Security from '../core/security.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Router.init();
+            
+            // 1. Ambil ID dari URL (Contoh: unit-detail.html?id=beat)
+            const params = new URLSearchParams(window.location.search);
+            const unitId = params.get('id');
+
+            // 2. Proteksi XSS pada ID URL (PENTING!)
+            if (unitId) {
+                const safeId = Security.sanitize(unitId);
+                console.log("Menampilkan detail untuk:", safeId);
+                
+                // TODO: Nanti di sini kita panggil fungsi fetch data dari JSON
+                // loadUnitData(safeId);
+                
+                // Update Link WA otomatis
+                const waBtn = document.getElementById('wa-link');
+                waBtn.href = `https://wa.me/6281316445477?text=Halo%20Mas%20Andika,%20saya%20mau%20info%20detail%20motor%20${safeId}`;
+            } else {
+                // Kalau tidak ada ID, kembalikan ke katalog
+                window.location.href = 'katalog.html';
+            }
+        });
+    </script>
+
+</body>
+</html>
