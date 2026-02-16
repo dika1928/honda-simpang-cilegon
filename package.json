@@ -1,0 +1,31 @@
+{
+  "name": "honda-simpang-digital-platform",
+  "version": "1.0.0",
+  "description": "Secure Digital Platform for Honda Sales and Customer Management",
+  "main": "public/index.html",
+  "author": "Andika Rendi Prakarsa",
+  "license": "MIT",
+  "scripts": {
+    "start": "echo 'Project is running in static mode. Open public/index.html' && exit 0",
+    "security-scan": "echo 'Running security audit...' && npm audit",
+    "build": "echo 'Building for production...' && exit 0"
+  },
+  "dependencies": {
+    "decap-cms": "^3.0.0",
+    "netlify-identity-widget": "^1.9.2"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dika1928/honda-simpang-pro"
+  },
+  "keywords": [
+    "honda",
+    "sales",
+    "secure-coding",
+    "netlify",
+    "decap-cms"
+  ]
+}
