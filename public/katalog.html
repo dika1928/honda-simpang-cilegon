@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Katalog Motor Honda | Honda Simpang Cilegon</title>
+    <meta name="description" content="Daftar harga motor Honda terbaru di Cilegon. Cek spesifikasi Beat, Vario, PCX, Stylo, CBR, dan CRF.">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="text-red">Honda</span>Simpang
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="katalog.html" class="active">Katalog</a></li>
+                    <li><a href="simulasi.html">Simulasi Kredit</a></li>
+                    <li><a href="promo.html">Promo</a></li>
+                    <li><a href="edukasi.html">Edukasi</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <section class="filter-section">
+        <div class="container">
+            <h1>Pilih Motor Impianmu</h1>
+            
+            <div class="search-box">
+                <input type="search" id="search-input" placeholder="Cari tipe motor... (misal: Beat, Stylo)">
+                <button id="search-btn">Cari</button>
+            </div>
+
+            <div class="category-buttons">
+                <button class="filter-btn active" data-category="all">Semua</button>
+                <button class="filter-btn" data-category="matic">Matic</button>
+                <button class="filter-btn" data-category="sport">Sport</button>
+                <button class="filter-btn" data-category="cub">Bebek / Cub</button>
+                <button class="filter-btn" data-category="ev">Listrik (EV)</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="catalog-grid">
+        <div class="container">
+            <div id="motor-list" class="grid-container">
+                
+                <div class="product-card" data-category="matic">
+                    <div class="badge-promo">DP Ringan</div>
+                    <img src="https://via.placeholder.com/300x200?text=Honda+Stylo+160" alt="Honda Stylo 160" class="product-img">
+                    <div class="product-info">
+                        <h3>Honda Stylo 160</h3>
+                        <p class="price">Mulai Rp 27.xxx.xxx</p>
+                        <div class="specs">
+                            <span>160cc</span> • <span>Keyless</span> • <span>ABS</span>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="unit-detail.html?id=stylo160" class="btn-detail">Detail</a>
+                            <a href="https://wa.me/6281316445477?text=Info%20Stylo%20160" class="btn-wa">Chat WA</a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            
+            <div id="loading" style="display:none; text-align:center;">
+                <p>Memuat data motor...</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Honda Simpang Cilegon.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import Router from '../core/router.js';
+        
+        // Inisialisasi Router saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            Router.init();
+            console.log("Katalog siap loading data...");
+            // Nanti logika ambil data JSON akan kita taruh di file terpisah biar rapi
+        });
+    </script>
+
+</body>
+</html>
