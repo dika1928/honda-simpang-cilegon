@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Simulasi Kredit Motor | Honda Simpang Cilegon</title>
+    <meta name="description" content="Hitung cicilan motor Honda impianmu. Simulasi kredit transparan dengan DP ringan dan tenor fleksibel hingga 35 bulan.">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="text-red">Honda</span>Simpang
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog</a></li>
+                    <li><a href="simulasi.html" class="active">Simulasi Kredit</a></li>
+                    <li><a href="promo.html">Promo</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <section class="simulation-section">
+        <div class="container">
+            <h1>Hitung Cicilan Motor Anda</h1>
+            <p class="subtitle">Dapatkan estimasi angsuran terbaik sesuai budget.</p>
+
+            <div class="calculator-card">
+                <form id="kredit-form">
+                    <div class="form-group">
+                        <label for="select-motor">Pilih Unit Motor</label>
+                        <select id="select-motor" required>
+                            <option value="">-- Pilih Tipe Motor --</option>
+                            <option value="beat-deluxe" data-price="20500000">Honda Beat Deluxe</option>
+                            <option value="vario-160" data-price="27500000">Honda Vario 160 CBS</option>
+                            <option value="pcx-160" data-price="33400000">Honda PCX 160 CBS</option>
+                            <option value="stylo-160" data-price="28000000">Honda Stylo 160 ABS</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-otr">Harga OTR (Rp)</label>
+                        <input type="number" id="input-otr" readonly placeholder="Otomatis terisi...">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="input-dp">Uang Muka / DP (Rp)</label>
+                        <input type="number" id="input-dp" placeholder="Minimal 10% (Contoh: 2000000)" min="500000" required>
+                        <small class="text-hint">*DP makin besar, cicilan makin ringan.</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="select-tenor">Jangka Waktu (Bulan)</label>
+                        <select id="select-tenor" required>
+                            <option value="11">11 Bulan</option>
+                            <option value="17">17 Bulan</option>
+                            <option value="23">23 Bulan</option>
+                            <option value="29">29 Bulan</option>
+                            <option value="35">35 Bulan</option>
+                        </select>
+                    </div>
+
+                    <button type="button" id="btn-hitung" class="btn-primary btn-full">Hitung Angsuran</button>
+                </form>
+
+                <div id="result-box" class="result-box" style="display:none;">
+                    <h3>Hasil Simulasi</h3>
+                    <div class="result-row">
+                        <span>Pokok Hutang:</span>
+                        <strong id="res-pokok">Rp -</strong>
+                    </div>
+                    <div class="result-row highlight">
+                        <span>Angsuran per Bulan:</span>
+                        <strong id="res-angsuran" class="text-red text-xl">Rp -</strong>
+                    </div>
+                    
+                    <div class="note-box">
+                        <p>⚠️ Perhitungan ini adalah estimasi. Harga real bisa lebih murah tergantung promo diskon dealer saat ini.</p>
+                    </div>
+
+                    <a href="#" id="wa-ajukan" class="btn-wa btn-full">
+                        Ajukan Kredit Ini Sekarang (WA)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Honda Simpang Cilegon.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import Router from '../core/router.js';
+        import Validator from '../core/validator.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Router.init();
+            
+            // Logic Sederhana untuk Kalkulator (Versi Statis Sementara)
+            const motorSelect = document.getElementById('select-motor');
+            const otrInput = document.getElementById('input-otr');
+            const dpInput = document.getElementById('input-dp');
+            const btnHitung = document.getElementById('btn-hitung');
+            const resultBox = document.getElementById('result-box');
+            
+            // 1. Auto-fill Harga OTR saat motor dipilih
+            motorSelect.addEventListener('change', function() {
+                const selectedOption = this.options[this.selectedIndex];
+                const price = selectedOption.getAttribute('data-price');
+                if(price) {
+                    otrInput.value = price;
+                    // Set default DP 15%
+                    dpInput.value = price * 0.15;
+                } else {
+                    otrInput.value = '';
+                    dpInput.value = '';
+                }
+            });
+
+            // 2. Event Klik Hitung
+            btnHitung.addEventListener('click', () => {
+                const harga = parseFloat(otrInput.value) || 0;
+                const dp = parseFloat(dpInput.value) || 0;
+                const tenor = parseInt(document.getElementById('select-tenor').value) || 35;
+                
+                // Panggil Validator Core
+                const rules = {
+                    dp: { required: true, min: 500000, type: 'number' }
+                };
+                
+                // Cek validasi DP
+                const errors = Validator.check({ dp: dp }, rules);
+                
+                if(errors) {
+                    alert("Mohon cek inputan DP Anda. Minimal Rp 500.000");
+                    return;
+                }
+
+                if(harga > 0) {
+                    // RUMUS SIMPEL BUNGA FLAT (Contoh: 2.5% per bulan)
+                    // Nanti kita ganti rumus leasing asli di assets/js/kredit.js
+                    const pokokHutang = harga - dp;
+                    const bunga = 0.025; 
+                    const totalBunga = pokokHutang * bunga * tenor;
+                    const totalHutang = pokokHutang + totalBunga;
+                    const angsuran = Math.ceil(totalHutang / tenor);
+
+                    // Tampilkan Hasil
+                    document.getElementById('res-pokok').innerText = "Rp " + pokokHutang.toLocaleString('id-ID');
+                    document.getElementById('res-angsuran').innerText = "Rp " + angsuran.toLocaleString('id-ID');
+                    
+                    // Update Link WA
+                    const waLink = document.getElementById('wa-ajukan');
+                    const motorName = motorSelect.options[motorSelect.selectedIndex].text;
+                    const pesan = `Halo Mas Andika, saya mau ajukan kredit ${motorName}. DP: ${dp.toLocaleString('id-ID')}, Tenor: ${tenor} bulan. Mohon dibantu prosesnya.`;
+                    waLink.href = `https://wa.me/6281316445477?text=${encodeURIComponent(pesan)}`;
+
+                    // Munculkan Box
+                    resultBox.style.display = 'block';
+                    resultBox.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert("Silakan pilih motor terlebih dahulu.");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
