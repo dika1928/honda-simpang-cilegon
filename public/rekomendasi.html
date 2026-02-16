@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Cari Motor Honda yang Cocok | Personal Assistant</title>
+    <meta name="description" content="Bingung pilih motor? Jawab 3 pertanyaan simpel dan temukan motor Honda yang paling pas dengan gaya hidup dan budget kamu.">
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <span class="text-red">Honda</span>Simpang
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog</a></li>
+                    <li><a href="simulasi.html">Simulasi Kredit</a></li>
+                    <li><a href="rekomendasi.html" class="active">Cari Motor</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <section class="quiz-section">
+        <div class="container">
+            <div class="quiz-card">
+                <div class="quiz-header">
+                    <h1>Temukan Jodoh Motormu</h1>
+                    <p>Jawab 4 pertanyaan singkat, AI kami akan memilihkan yang terbaik.</p>
+                </div>
+
+                <form id="quiz-form">
+                    <div class="quiz-step active" data-step="1">
+                        <h3>1. Siapa yang akan menggunakan motor ini?</h3>
+                        <div class="option-grid">
+                            <label class="option-card">
+                                <input type="radio" name="user_type" value="student" required>
+                                <span class="icon">🎓</span>
+                                <span class="label">Pelajar / Mahasiswa</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="user_type" value="worker">
+                                <span class="icon">💼</span>
+                                <span class="label">Pekerja / Karyawan</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="user_type" value="mom">
+                                <span class="icon">👩‍👧‍👦</span>
+                                <span class="label">Ibu Rumah Tangga</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="user_type" value="hobby">
+                                <span class="icon">😎</span>
+                                <span class="label">Hobi / Gaya</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-step" data-step="2">
+                        <h3>2. Untuk apa motor ini digunakan?</h3>
+                        <div class="option-grid">
+                            <label class="option-card">
+                                <input type="radio" name="usage" value="daily" required>
+                                <span class="icon">🛵</span>
+                                <span class="label">Harian (Irit BBM)</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="usage" value="distance">
+                                <span class="icon">🛣️</span>
+                                <span class="label">Jarak Jauh / Touring</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="usage" value="style">
+                                <span class="icon">✨</span>
+                                <span class="label">Nongkrong / Gaya</span>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" name="usage" value="sport">
+                                <span class="icon">🏎️</span>
+                                <span class="label">Kecepatan & Performa</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="quiz-step" data-step="3">
+                        <h3>3. Berapa estimasi budget DP Anda?</h3>
+                        <select id="budget-select" class="form-input">
+                            <option value="low">Di bawah 2 Juta</option>
+                            <option value="medium">2 - 4 Juta</option>
+                            <option value="high">Di atas 4 Juta / Cash</option>
+                        </select>
+                        <br><br>
+                        <button type="button" id="btn-analyze" class="btn-primary btn-full">Analisa Sekarang</button>
+                    </div>
+                </form>
+
+                <div id="result-container" class="result-container" style="display:none;">
+                    <div class="loading-spinner" id="spinner">Sedang Menganalisa...</div>
+                    
+                    <div id="final-result" style="display:none;">
+                        <h2>✨ Jodoh Motor Kamu Adalah:</h2>
+                        <div class="match-card">
+                            <img id="match-img" src="" alt="Motor Cocok">
+                            <h3 id="match-name">Honda Vario 160</h3>
+                            <p class="match-reason" id="match-reason">
+                                Cocok banget buat kamu yang butuh performa tinggi tapi tetap irit untuk harian.
+                            </p>
+                            <div class="match-actions">
+                                <a href="" id="match-wa" class="btn-primary">
+                                    Ambil Promo Motor Ini (WA)
+                                </a>
+                                <a href="simulasi.html" class="btn-secondary">Cek Cicilan</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Honda Simpang Cilegon.</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import Router from '../core/router.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            Router.init();
+
+            // LOGIKA REKOMENDASI SEDERHANA
+            // Nanti bisa dipindah ke core/recommendation.js biar lebih rapi
+            
+            const btnAnalyze = document.getElementById('btn-analyze');
+            const resultContainer = document.getElementById('result-container');
+            const quizForm = document.getElementById('quiz-form');
+            const spinner = document.getElementById('spinner');
+            const finalResult = document.getElementById('final-result');
+
+            btnAnalyze.addEventListener('click', () => {
+                // Ambil Data
+                const userType = document.querySelector('input[name="user_type"]:checked')?.value;
+                const usage = document.querySelector('input[name="usage"]:checked')?.value;
+                const budget = document.getElementById('budget-select').value;
+
+                if(!userType || !usage) {
+                    alert("Mohon pilih opsi terlebih dahulu!");
+                    return;
+                }
+
+                // Tampilkan Loading Effect
+                quizForm.style.display = 'none';
+                resultContainer.style.display = 'block';
+
+                // Simulasi Mikir AI (1.5 detik)
+                setTimeout(() => {
+                    spinner.style.display = 'none';
+                    finalResult.style.display = 'block';
+                    calculateMatch(userType, usage, budget);
+                }, 1500);
+            });
+
+            function calculateMatch(type, usage, budget) {
+                let motor = { name: "Honda Beat", img: "https://via.placeholder.com/400x300?text=Honda+Beat", reason: "Pilihan paling hemat dan lincah!" };
+
+                // LOGIKA PEMILIHAN (Bisa dikembangkan)
+                if (type === 'student' && budget === 'low') {
+                    motor = { name: "Honda Beat Deluxe", img: "https://via.placeholder.com/400x300?text=Beat+Deluxe", reason: "Sangat irit BBM, lincah nyalip macet, dan cicilan paling masuk kantong pelajar." };
+                } else if (usage === 'style') {
+                    motor = { name: "Honda Stylo 160", img: "https://via.placeholder.com/400x300?text=Honda+Stylo", reason: "Desain retro modern bikin kamu jadi pusat perhatian saat nongkrong." };
+                } else if (usage === 'distance' || type === 'worker') {
+                    motor = { name: "Honda PCX 160", img: "https://via.placeholder.com/400x300?text=Honda+PCX", reason: "Posisi duduk rileks, bagasi luas, sangat nyaman untuk perjalanan jauh ke kantor." };
+                } else if (usage === 'sport') {
+                    motor = { name: "Honda Vario 160", img: "https://via.placeholder.com/400x300?text=Vario+160", reason: "Akselerasi responsif, desain tajam, cocok buat yang suka kecepatan." };
+                }
+
+                // Update Tampilan
+                document.getElementById('match-name').textContent = motor.name;
+                document.getElementById('match-img').src = motor.img;
+                document.getElementById('match-reason').textContent = motor.reason;
+                
+                // Update Link WA
+                const msg = `Halo, saya sudah coba fitur rekomendasi dan cocok dengan ${motor.name}. Boleh minta simulasi kreditnya?`;
+                document.getElementById('match-wa').href = `https://wa.me/6281316445477?text=${encodeURIComponent(msg)}`;
+            }
+        });
+    </script>
+
+</body>
+</html>
