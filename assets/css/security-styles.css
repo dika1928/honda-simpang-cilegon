@@ -1,0 +1,37 @@
+/* ====================================================================
+HONDA SIMPANG - SECURITY STYLESHEET
+====================================================================
+* Proteksi visual dan privasi data.
+*/
+
+/* 1. ANTI-CLICKJACKING FALLBACK */
+/* Jika browser tua tidak support header X-Frame-Options */
+html {
+    display: none; /* Default sembunyi */
+}
+
+/* 2. PRINT PROTECTION */
+/* Saat halaman diprint (CTRL+P), sembunyikan elemen navigasi & tombol WA */
+@media print {
+    header, footer, .floating-wa, .auth-btn, .mobile-menu-toggle, .btn-primary, .btn-secondary {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+
+    /* Pastikan link tercetak jelas (untuk bukti penawaran) */
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+}
+
+/* 3. INPUT SECURITY */
+/* Mencegah browser menyimpan history pada field sensitif (seperti NIK/Gaji jika ada) */
+input[type="password"], 
+input[name="gaji"], 
+input[name="ktp"] {
+    -webkit-text-security: disc;
+}
