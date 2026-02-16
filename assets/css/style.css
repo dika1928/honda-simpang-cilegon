@@ -1,0 +1,14 @@
+/* ====================================================================
+HONDA SIMPANG - GLOBAL STYLESHEET LOADER
+====================================================================
+* File ini bertugas mengimpor semua modul CSS agar HTML tetap bersih.
+*/
+
+/* 1. Muat Gaya Utama */
+@import url('main.css');
+
+/* 2. Muat Gaya Responsif (HP/Tablet) */
+@import url('responsive.css');
+
+/* 3. Muat Proteksi Keamanan */
+@import url('security-styles.css');
