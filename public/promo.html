@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promo Honda Terbaru | Diskon & Cashback</title>
+    
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo"><span class="text-red">Honda</span>Simpang</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="katalog.html">Katalog</a></li>
+                    <li><a href="simulasi.html">Simulasi Kredit</a></li>
+                    <li><a href="promo.html" class="active">Promo</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">☰</div>
+        </div>
+    </header>
+
+    <section class="promo-hero">
+        <div class="container">
+            <span class="promo-badge">HOT DEAL BULAN INI 🔥</span>
+            <h1>Promo Gebyar Honda 2026</h1>
+            
+            <div class="countdown-box">
+                <p>Promo berakhir dalam:</p>
+                <div class="timer">
+                    <div class="time-block"><span id="days">00</span>Hari</div>
+                    <div class="time-block"><span id="hours">00</span>Jam</div>
+                    <div class="time-block"><span id="minutes">00</span>Menit</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="promo-gallery">
+        <div class="container">
+            <h2>Brosur Resmi</h2>
+            <div class="grid-2">
+                <div class="promo-item">
+                    <img src="https://via.placeholder.com/500x700?text=Brosur+Matic" alt="Brosur Matic">
+                    <div class="promo-action">
+                        <h3>Paket Hemat Matic</h3>
+                        <p>Potongan angsuran hingga 3 bulan!</p>
+                        <a href="https://wa.me/6281316445477?text=Mas,%20mau%20klaim%20promo%20Paket%20Hemat%20Matic" class="btn-primary btn-full">Klaim Promo Ini</a>
+                    </div>
+                </div>
+
+                <div class="promo-item">
+                    <img src="https://via.placeholder.com/500x700?text=Brosur+Sport" alt="Brosur Sport">
+                    <div class="promo-action">
+                        <h3>Sport Fair 2026</h3>
+                        <p>Cashback hingga 1.5 Juta Rupiah.</p>
+                        <a href="https://wa.me/6281316445477?text=Mas,%20mau%20klaim%20promo%20Sport%20Fair" class="btn-primary btn-full">Klaim Promo Ini</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container"><p>&copy; 2026 Honda Simpang Cilegon.</p></div>
+    </footer>
+
+    <script type="module">
+        import Router from '../core/router.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            Router.init();
+            
+            // LOGIKA COUNTDOWN TIMER (Urgency Psikologis)
+            // Set waktu berakhir ke akhir bulan ini
+            const date = new Date();
+            const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0); 
+            
+            function updateTimer() {
+                const now = new Date().getTime();
+                const distance = endOfMonth - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+            }
+            
+            setInterval(updateTimer, 1000);
+            updateTimer();
+        });
+    </script>
+</body>
+</html>
