@@ -1,0 +1,35 @@
+# ==============================================================================
+# HONDA SIMPANG DIGITAL PLATFORM - NETLIFY CONFIGURATION
+# ==============================================================================
+
+[build]
+  publish = "public"
+  # Perintah build dikosongkan karena kita menggunakan arsitektur vanilla modern
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # ANTI-CLICKJACKING: Mencegah web kamu dipasang di iframe situs lain
+    X-Frame-Options = "DENY"
+    
+    # ANTI-XSS & MIME SNIFFING: Memaksa browser mengikuti tipe konten yang kita tentukan
+    X-Content-Type-Options = "nosniff"
+    
+    # REFERRER POLICY: Menjaga privasi data saat user klik link keluar
+    Referrer-Policy = "no-referrer"
+    
+    # BROWSER CROSS-SITE SCRIPTING PROTECTION
+    X-XSS-Protection = "1; mode=block"
+    
+    # CONTENT SECURITY POLICY (CSP): 
+    # Hanya mengizinkan script dari domain sendiri dan source terpercaya (Netlify Identity)
+    Content-Security-Policy = "default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' https://identity.netlify.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
+
+    # PERMISSIONS POLICY: Mematikan fitur sensor yang tidak perlu demi keamanan user
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
